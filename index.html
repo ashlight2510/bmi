@@ -37,6 +37,13 @@
       content="https://dummyimage.com/1200x630/0f172a/ffffff&text=BMI+Survey+Diet+Plan"
     />
 
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1204894220949193"
+      crossorigin="anonymous"
+    ></script>
+
     <!-- ✅ 파비콘: 자동 생성(여기서는 SVG data URI로 “프로젝트마다” 쉽게 바꾸게 만들어둠) -->
     <!-- 아래 SERVICE_OG_TEXT만 바꾸면 파비콘 글자도 같이 바뀌게 JS가 세팅합니다 -->
     <link
@@ -49,10 +56,10 @@
     <style>
       :root {
         --bg: #0b1020;
-        --card: rgba(255, 255, 255, 0.06);
-        --line: rgba(255, 255, 255, 0.12);
-        --text: #eef1ff;
-        --muted: rgba(238, 241, 255, 0.75);
+        --card: rgba(255, 255, 255, 0.08);
+        --line: rgba(255, 255, 255, 0.18);
+        --text: #ffffff;
+        --muted: rgba(255, 255, 255, 0.88);
         --accent: rgba(24, 213, 200, 0.9);
         --accent2: rgba(113, 97, 239, 0.95);
         --danger: #ffb4b4;
@@ -105,10 +112,12 @@
         margin: 0 0 6px;
         font-size: 22px;
         letter-spacing: -0.3px;
+        color: #ffffff;
+        font-weight: 700;
       }
       .sub {
         margin: 0;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.85);
         line-height: 1.45;
       }
       .content {
@@ -132,7 +141,8 @@
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.05);
         font-size: 13px;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
       }
       .progress {
         flex: 1;
@@ -152,7 +162,7 @@
       .step {
         border: 1px solid var(--line);
         border-radius: calc(var(--r) * 1.2);
-        background: rgba(0, 0, 0, 0.18);
+        background: rgba(255, 255, 255, 0.04);
         padding: 16px;
         display: none;
         gap: 12px;
@@ -174,15 +184,18 @@
         display: grid;
         place-items: center;
         font-weight: 800;
+        color: #ffffff;
       }
       .q h2 {
         margin: 0;
         font-size: 18px;
         letter-spacing: -0.3px;
+        color: #ffffff;
+        font-weight: 600;
       }
       .q p {
         margin: 4px 0 0;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.85);
         line-height: 1.5;
         font-size: 13px;
       }
@@ -215,11 +228,13 @@
       .choice strong {
         display: block;
         font-size: 14px;
+        color: #ffffff;
+        font-weight: 600;
       }
       .choice span {
         display: block;
         margin-top: 4px;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.85);
         font-size: 12.5px;
         line-height: 1.4;
       }
@@ -233,16 +248,18 @@
       }
       label {
         font-size: 13px;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
       }
       input {
         width: 100%;
         padding: 12px 12px;
         border-radius: var(--r);
         border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.06);
-        color: var(--text);
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
         outline: none;
+        font-size: 14px;
       }
       input:focus {
         border-color: rgba(24, 213, 200, 0.55);
@@ -261,9 +278,10 @@
         border-radius: var(--r);
         border: 1px solid var(--line);
         background: rgba(113, 97, 239, 0.45);
-        color: var(--text);
+        color: #ffffff;
         cursor: pointer;
         font-weight: 700;
+        font-size: 14px;
       }
       .btn:hover {
         background: rgba(113, 97, 239, 0.58);
@@ -280,7 +298,7 @@
       }
       .hint {
         font-size: 12.5px;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.8);
         line-height: 1.45;
       }
       .warn {
@@ -292,7 +310,7 @@
       .result {
         border: 1px solid var(--line);
         border-radius: calc(var(--r) * 1.2);
-        background: rgba(0, 0, 0, 0.18);
+        background: rgba(255, 255, 255, 0.04);
         padding: 16px;
         display: none;
         gap: 12px;
@@ -305,6 +323,7 @@
         font-weight: 900;
         letter-spacing: -0.8px;
         line-height: 1.05;
+        color: #ffffff;
       }
       .badge {
         display: inline-flex;
@@ -316,7 +335,59 @@
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.06);
         font-size: 13px;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
+      }
+      .bmi-scale {
+        display: grid;
+        gap: 10px;
+      }
+      .scale-bar {
+        position: relative;
+        height: 12px;
+        border-radius: 999px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .scale-bar .seg {
+        height: 100%;
+        float: left;
+      }
+      .seg.under {
+        width: 17.5%;
+        background: rgba(122, 204, 255, 0.65);
+      }
+      .seg.normal {
+        width: 22.5%;
+        background: rgba(24, 213, 200, 0.7);
+      }
+      .seg.over {
+        width: 10%;
+        background: rgba(255, 214, 102, 0.7);
+      }
+      .seg.obese {
+        width: 50%;
+        background: rgba(255, 140, 140, 0.75);
+      }
+      .scale-marker {
+        position: absolute;
+        top: -8px;
+        width: 2px;
+        height: 28px;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+        transform: translateX(-1px);
+      }
+      .scale-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .scale-caption {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.82);
       }
       .cards {
         display: grid;
@@ -337,12 +408,14 @@
       .mini h3 {
         margin: 0 0 6px;
         font-size: 14px;
+        color: #ffffff;
+        font-weight: 600;
       }
       .mini p {
         margin: 0;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.9);
         font-size: 12.8px;
-        line-height: 1.45;
+        line-height: 1.5;
       }
       .hr {
         height: 1px;
@@ -376,7 +449,7 @@
       }
       footer {
         margin-top: 10px;
-        color: rgba(238, 241, 255, 0.65);
+        color: rgba(255, 255, 255, 0.75);
         font-size: 12px;
         line-height: 1.45;
         padding: 0 6px;
@@ -386,6 +459,7 @@
         padding: 2px 6px;
         border-radius: 8px;
         border: 1px solid var(--line);
+        color: rgba(255, 255, 255, 0.9);
       }
     </style>
   </head>
@@ -676,6 +750,22 @@
             <div class="badge" id="badge">🧾 결과 생성 중…</div>
             <div class="big" id="bmiBig">—</div>
             <div class="hint" id="funLine">—</div>
+            <div class="bmi-scale" aria-label="BMI 분포 위치">
+              <div class="scale-caption" id="bmiCaption">BMI 위치: —</div>
+              <div class="scale-bar" role="img" aria-label="BMI 구간 그래프">
+                <span class="seg under"></span>
+                <span class="seg normal"></span>
+                <span class="seg over"></span>
+                <span class="seg obese"></span>
+                <span class="scale-marker" id="bmiMarker"></span>
+              </div>
+              <div class="scale-labels">
+                <span>저체중 18.5</span>
+                <span>정상 23</span>
+                <span>과체중 25</span>
+                <span>비만 30+</span>
+              </div>
+            </div>
 
             <div class="hr"></div>
 
@@ -744,12 +834,6 @@
               상태/질환/약 복용 등이 있으면 전문가 상담이 안전합니다.
             </p>
           </div>
-
-          <footer>
-            템플릿 규칙: <code class="k">OG 이미지 text는 영어</code>,
-            <code class="k">파비콘 자동 생성</code>,
-            <code class="k">결과 하단 CTA</code>.
-          </footer>
         </section>
       </div>
     </div>
@@ -1007,6 +1091,21 @@ ${document.getElementById("oneLiner").textContent}
         return { label: "Severely Obese", ko: "고도비만", emoji: "🚨" };
       }
 
+      function bmiStatusKo(bmi) {
+        if (bmi < 18.5) return "낮은 편";
+        if (bmi < 23) return "정상 범위";
+        if (bmi < 25) return "높은 편";
+        if (bmi < 30) return "높은 편";
+        return "매우 높은 편";
+      }
+
+      function bmiToPercent(bmi) {
+        const min = 15;
+        const max = 35;
+        const clamped = Math.min(max, Math.max(min, bmi));
+        return ((clamped - min) / (max - min)) * 100;
+      }
+
       function renderResult() {
         const hM = state.heightCm / 100;
         const bmi = state.weightKg / (hM * hM);
@@ -1021,6 +1120,12 @@ ${document.getElementById("oneLiner").textContent}
           b,
           c.ko
         );
+        document.getElementById(
+          "bmiCaption"
+        ).textContent = `BMI 위치: ${b.toFixed(1)} (${bmiStatusKo(bmi)})`;
+        document.getElementById("bmiMarker").style.left = `${bmiToPercent(
+          bmi
+        )}%`;
 
         // 맞춤 팁 생성
         const one = oneLinerByProfile();
