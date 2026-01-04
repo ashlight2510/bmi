@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- ✅ 기본 SEO -->
+    <title>BMI Survey | Fun Diet Plan</title>
+    <meta
+      name="description"
+      content="A fun step-by-step BMI survey that gives personalized diet tips based on your style."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="/" />
+
+    <!-- ✅ OG (요구: og:image dummyimage + text는 영어로 서비스에 맞게) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="BMI Survey" />
+    <meta
+      property="og:description"
+      content="Step-by-step survey → fun BMI result → personalized diet tips."
+    />
+    <meta
+      property="og:image"
+      content="https://dummyimage.com/1200x630/0f172a/ffffff&text=BMI+Survey+Diet+Plan"
+    />
+
+    <!-- ✅ Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BMI Survey" />
+    <meta
+      name="twitter:description"
+      content="Step-by-step survey → fun BMI result → personalized diet tips."
+    />
+    <meta
+      name="twitter:image"
+      content="https://dummyimage.com/1200x630/0f172a/ffffff&text=BMI+Survey+Diet+Plan"
+    />
+
+    <!-- ✅ 파비콘: 자동 생성(여기서는 SVG data URI로 “프로젝트마다” 쉽게 바꾸게 만들어둠) -->
+    <!-- 아래 SERVICE_OG_TEXT만 바꾸면 파비콘 글자도 같이 바뀌게 JS가 세팅합니다 -->
+    <link
+      id="favicon"
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f172a'/%3E%3Ctext x='50' y='64' font-size='44' text-anchor='middle' fill='white' font-family='system-ui'%3EBMI%3C/text%3E%3C/svg%3E"
+    />
+
+    <style>
+      :root {
+        --bg: #0b1020;
+        --card: rgba(255, 255, 255, 0.06);
+        --line: rgba(255, 255, 255, 0.12);
+        --text: #eef1ff;
+        --muted: rgba(238, 241, 255, 0.75);
+        --accent: rgba(24, 213, 200, 0.9);
+        --accent2: rgba(113, 97, 239, 0.95);
+        --danger: #ffb4b4;
+        --r: 18px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR",
+          sans-serif;
+        background: radial-gradient(
+            1200px 900px at 20% 10%,
+            rgba(113, 97, 239, 0.22),
+            transparent 55%
+          ),
+          radial-gradient(
+            1000px 800px at 80% 10%,
+            rgba(24, 213, 200, 0.18),
+            transparent 55%
+          ),
+          var(--bg);
+        color: var(--text);
+        padding: 24px 14px;
+      }
+      .wrap {
+        width: min(860px, 94vw);
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: calc(var(--r) * 1.4);
+        box-shadow: 0 22px 80px rgba(0, 0, 0, 0.38);
+        overflow: hidden;
+      }
+      header {
+        padding: 22px 22px 16px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(
+          120deg,
+          rgba(113, 97, 239, 0.28),
+          rgba(24, 213, 200, 0.14)
+        );
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 22px;
+        letter-spacing: -0.3px;
+      }
+      .sub {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+      .content {
+        padding: 18px 22px 22px;
+        display: grid;
+        gap: 14px;
+      }
+      .topbar {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .progress {
+        flex: 1;
+        min-width: 240px;
+        height: 10px;
+        border-radius: 999px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--accent2), var(--accent));
+        transition: width 0.35s ease;
+      }
+      .step {
+        border: 1px solid var(--line);
+        border-radius: calc(var(--r) * 1.2);
+        background: rgba(0, 0, 0, 0.18);
+        padding: 16px;
+        display: none;
+        gap: 12px;
+      }
+      .step.active {
+        display: grid;
+      }
+      .q {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .q .num {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+      .q h2 {
+        margin: 0;
+        font-size: 18px;
+        letter-spacing: -0.3px;
+      }
+      .q p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 13px;
+      }
+      .choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      @media (max-width: 640px) {
+        .choices {
+          grid-template-columns: 1fr;
+        }
+      }
+      .choice {
+        padding: 12px 12px;
+        border-radius: var(--r);
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.05);
+        cursor: pointer;
+        transition: transform 0.05s ease, background 0.18s ease,
+          border-color 0.18s ease;
+        text-align: left;
+      }
+      .choice:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .choice:active {
+        transform: scale(0.99);
+      }
+      .choice strong {
+        display: block;
+        font-size: 14px;
+      }
+      .choice span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.4;
+      }
+      .choice[aria-pressed="true"] {
+        border-color: rgba(24, 213, 200, 0.5);
+        background: rgba(24, 213, 200, 0.12);
+      }
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+      label {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      input {
+        width: 100%;
+        padding: 12px 12px;
+        border-radius: var(--r);
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        outline: none;
+      }
+      input:focus {
+        border-color: rgba(24, 213, 200, 0.55);
+        box-shadow: 0 0 0 3px rgba(24, 213, 200, 0.15);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 4px;
+      }
+      .btn {
+        padding: 12px 14px;
+        border-radius: var(--r);
+        border: 1px solid var(--line);
+        background: rgba(113, 97, 239, 0.45);
+        color: var(--text);
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .btn:hover {
+        background: rgba(113, 97, 239, 0.58);
+      }
+      .btn.ghost {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .btn.ghost:hover {
+        background: rgba(255, 255, 255, 0.09);
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .hint {
+        font-size: 12.5px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+      .warn {
+        display: none;
+        color: var(--danger);
+        font-size: 12.5px;
+        line-height: 1.45;
+      }
+      .result {
+        border: 1px solid var(--line);
+        border-radius: calc(var(--r) * 1.2);
+        background: rgba(0, 0, 0, 0.18);
+        padding: 16px;
+        display: none;
+        gap: 12px;
+      }
+      .result.show {
+        display: grid;
+      }
+      .big {
+        font-size: 36px;
+        font-weight: 900;
+        letter-spacing: -0.8px;
+        line-height: 1.05;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        padding: 7px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      @media (max-width: 720px) {
+        .cards {
+          grid-template-columns: 1fr;
+        }
+      }
+      .mini {
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 12px;
+      }
+      .mini h3 {
+        margin: 0 0 6px;
+        font-size: 14px;
+      }
+      .mini p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12.8px;
+        line-height: 1.45;
+      }
+      .hr {
+        height: 1px;
+        background: var(--line);
+        margin: 6px 0;
+      }
+      .cta {
+        margin-top: 6px;
+      }
+      .cta a {
+        text-decoration: none;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        border-radius: 22px;
+        border: 1px solid rgba(226, 232, 240, 0.25);
+        background: rgba(226, 232, 240, 0.85);
+        color: #0f172a;
+        padding: 12px 14px;
+        font-weight: 800;
+        transition: background 0.18s ease;
+      }
+      .cta a:hover {
+        background: rgba(226, 232, 240, 0.75);
+      }
+      .cta svg {
+        margin-left: 8px;
+        width: 20px;
+        height: 20px;
+      }
+      footer {
+        margin-top: 10px;
+        color: rgba(238, 241, 255, 0.65);
+        font-size: 12px;
+        line-height: 1.45;
+        padding: 0 6px;
+      }
+      code.k {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 2px 6px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <header>
+          <h1 id="serviceTitle">BMI 설문형 다이어트 플랜</h1>
+          <p class="sub">
+            한 번씩만 딸각. 숫자도 한 번씩만. 그리고 결과는… 은근히 도움 됨.
+          </p>
+        </header>
+
+        <section class="content">
+          <div class="topbar">
+            <div class="pill" id="stepLabel">STEP 1 / 7</div>
+            <div class="progress" aria-label="progress">
+              <div class="bar" id="bar"></div>
+            </div>
+            <button class="btn ghost" id="restartBtn" type="button">
+              처음부터
+            </button>
+          </div>
+
+          <!-- STEP 1 -->
+          <div class="step active" data-step="1">
+            <div class="q">
+              <div class="num">1</div>
+              <div>
+                <h2>당신의 목표는?</h2>
+                <p>성격(?)에 따라 플랜이 달라집니다.</p>
+              </div>
+            </div>
+            <div class="choices" role="group" aria-label="goal">
+              <button
+                class="choice"
+                type="button"
+                data-key="goal"
+                data-val="fatloss"
+              >
+                <strong>지방 감량</strong><span>체지방 위주로 쭉쭉</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="goal"
+                data-val="recomp"
+              >
+                <strong>체형 개선</strong><span>근육은 지키고 라인 정리</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="goal"
+                data-val="health"
+              >
+                <strong>건강 습관</strong><span>무리 없이 오래 가는 방식</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="goal"
+                data-val="quickstart"
+              >
+                <strong>빠른 스타트</strong><span>일단 시작이 반이니까</span>
+              </button>
+            </div>
+            <div class="row">
+              <span class="hint">선택하면 자동으로 다음으로 넘어갑니다.</span>
+              <button class="btn" type="button" data-next>다음</button>
+            </div>
+            <div class="warn"></div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="step" data-step="2">
+            <div class="q">
+              <div class="num">2</div>
+              <div>
+                <h2>식사 스타일은?</h2>
+                <p>당신의 “현실 루틴”을 기준으로 추천합니다.</p>
+              </div>
+            </div>
+            <div class="choices" role="group" aria-label="eating">
+              <button
+                class="choice"
+                type="button"
+                data-key="eating"
+                data-val="snacker"
+              >
+                <strong>간식 파티형</strong><span>자잘하게 자주 먹는 편</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="eating"
+                data-val="bigmeals"
+              >
+                <strong>한 번에 크게형</strong
+                ><span>한 끼에 몰아서 먹는 편</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="eating"
+                data-val="late"
+              >
+                <strong>야식/늦은식사형</strong><span>밤에 힘이 나는 편</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="eating"
+                data-val="regular"
+              >
+                <strong>규칙러</strong><span>대체로 일정한 편</span>
+              </button>
+            </div>
+            <div class="row">
+              <button class="btn ghost" type="button" data-prev>이전</button>
+              <button class="btn" type="button" data-next>다음</button>
+            </div>
+            <div class="warn"></div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="step" data-step="3">
+            <div class="q">
+              <div class="num">3</div>
+              <div>
+                <h2>운동은 어떤 타입?</h2>
+                <p>“식후 운동/근력/유산소” 비율 추천에 반영됩니다.</p>
+              </div>
+            </div>
+            <div class="choices" role="group" aria-label="activity">
+              <button
+                class="choice"
+                type="button"
+                data-key="activity"
+                data-val="none"
+              >
+                <strong>거의 안 함</strong><span>지금은… 마음만 운동 중</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="activity"
+                data-val="walk"
+              >
+                <strong>걷기/가벼움</strong><span>산책은 잘함 (좋음)</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="activity"
+                data-val="gym"
+              >
+                <strong>근력 위주</strong><span>헬스장/홈트로 근육 지키기</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="activity"
+                data-val="mixed"
+              >
+                <strong>혼합형</strong><span>유산소+근력 적당히</span>
+              </button>
+            </div>
+            <div class="row">
+              <button class="btn ghost" type="button" data-prev>이전</button>
+              <button class="btn" type="button" data-next>다음</button>
+            </div>
+            <div class="warn"></div>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="step" data-step="4">
+            <div class="q">
+              <div class="num">4</div>
+              <div>
+                <h2>당신의 “배고픔 패턴”은?</h2>
+                <p>간헐적 단식/혈당관리/식사 타이밍 추천에 반영합니다.</p>
+              </div>
+            </div>
+            <div class="choices" role="group" aria-label="hunger">
+              <button
+                class="choice"
+                type="button"
+                data-key="hunger"
+                data-val="morning"
+              >
+                <strong>아침부터 배고픔</strong><span>눈 뜨면 위가 출근함</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="hunger"
+                data-val="evening"
+              >
+                <strong>저녁에 폭발</strong
+                ><span>퇴근하면 배고픔도 퇴근 안 함</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="hunger"
+                data-val="random"
+              >
+                <strong>랜덤</strong><span>배고픔이 자유영혼</span>
+              </button>
+              <button
+                class="choice"
+                type="button"
+                data-key="hunger"
+                data-val="stable"
+              >
+                <strong>대체로 안정적</strong><span>패턴이 있는 편</span>
+              </button>
+            </div>
+            <div class="row">
+              <button class="btn ghost" type="button" data-prev>이전</button>
+              <button class="btn" type="button" data-next>다음</button>
+            </div>
+            <div class="warn"></div>
+          </div>
+
+          <!-- STEP 5 (숫자 입력 1/2) -->
+          <div class="step" data-step="5">
+            <div class="q">
+              <div class="num">5</div>
+              <div>
+                <h2>키는 몇 cm?</h2>
+                <p>숫자는 딱 한 번만. (두 번 입력하면… 귀찮아요)</p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="height">키 (cm)</label>
+              <input
+                id="height"
+                type="number"
+                inputmode="decimal"
+                placeholder="예: 170"
+                min="80"
+                max="230"
+              />
+              <div class="hint">단위는 cm. (m로 입력하면 BMI가 삐끗합니다)</div>
+            </div>
+            <div class="row">
+              <button class="btn ghost" type="button" data-prev>이전</button>
+              <button class="btn" type="button" data-next>다음</button>
+            </div>
+            <div class="warn"></div>
+          </div>
+
+          <!-- STEP 6 (숫자 입력 2/2) -->
+          <div class="step" data-step="6">
+            <div class="q">
+              <div class="num">6</div>
+              <div>
+                <h2>몸무게는 몇 kg?</h2>
+                <p>여기도 한 번만. (정직함은 건강의 첫걸음)</p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="weight">몸무게 (kg)</label>
+              <input
+                id="weight"
+                type="number"
+                inputmode="decimal"
+                placeholder="예: 65"
+                min="20"
+                max="250"
+              />
+              <div class="hint">단위는 kg. (근육 30kg이면 이미 상위권)</div>
+            </div>
+            <div class="row">
+              <button class="btn ghost" type="button" data-prev>이전</button>
+              <button class="btn" type="button" id="finishBtn">
+                결과 보기
+              </button>
+            </div>
+            <div class="warn"></div>
+          </div>
+
+          <!-- STEP 7 (결과) -->
+          <div class="result" id="result">
+            <div class="badge" id="badge">🧾 결과 생성 중…</div>
+            <div class="big" id="bmiBig">—</div>
+            <div class="hint" id="funLine">—</div>
+
+            <div class="hr"></div>
+
+            <div class="cards">
+              <div class="mini">
+                <h3>당신 맞춤 “핵심 한 줄”</h3>
+                <p id="oneLiner">—</p>
+              </div>
+              <div class="mini">
+                <h3>이번 주 실천 1순위</h3>
+                <p id="priorityTip">—</p>
+              </div>
+              <div class="mini">
+                <h3>식후 운동 (딱 이만큼)</h3>
+                <p id="afterMeal">—</p>
+              </div>
+              <div class="mini">
+                <h3>혈당/간식 관리 팁</h3>
+                <p id="glucose">—</p>
+              </div>
+              <div class="mini">
+                <h3>간헐적 단식 (가능하면)</h3>
+                <p id="ifTip">—</p>
+              </div>
+              <div class="mini">
+                <h3>운동 구성 제안</h3>
+                <p id="workout">—</p>
+              </div>
+            </div>
+
+            <!-- ✅ 다른 서비스 보기 버튼 (요구 코드 + 위치: 결과 하단 CTA) -->
+            <div class="cta">
+              <a
+                href="https://funnyfunny.cloud"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                더 많은 테스트 해보기
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 4.5H19.5V10.5M11.25 12.75L19.5 4.5M18 13.5V18.75C18 19.9926 16.9926 21 15.75 21H6.75C5.50736 21 4.5 19.9926 4.5 18.75V9.75C4.5 8.50736 5.50736 7.5 6.75 7.5H12"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+
+            <div class="row">
+              <button class="btn ghost" type="button" id="backToSurvey">
+                설문 다시하기
+              </button>
+              <button class="btn" type="button" id="copyBtn">
+                결과 문구 복사
+              </button>
+            </div>
+
+            <p class="hint">
+              참고: 본 결과는 재미 + 일반 정보 목적입니다. 개인 건강
+              상태/질환/약 복용 등이 있으면 전문가 상담이 안전합니다.
+            </p>
+          </div>
+
+          <footer>
+            템플릿 규칙: <code class="k">OG 이미지 text는 영어</code>,
+            <code class="k">파비콘 자동 생성</code>,
+            <code class="k">결과 하단 CTA</code>.
+          </footer>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      /***************
+       * 프로젝트별로 “자동 세팅”하기 쉽게 만든 상수들
+       ***************/
+      const SERVICE_NAME_KO = "BMI 설문형 다이어트 플랜";
+      const SERVICE_OG_TEXT_EN = "BMI Survey Diet Plan"; // ✅ og:image text에 들어갈 영어
+      const FAVICON_TEXT = "BMI"; // ✅ 파비콘에 찍힐 1~3글자(영문 권장)
+
+      // 제목 적용
+      document.getElementById("serviceTitle").textContent = SERVICE_NAME_KO;
+
+      // og:image의 text를 강제로 서비스 맞춤(영문)
+      // (정적 HTML이라도, 서비스별 템플릿화할 때 여기만 바꿔도 됨)
+      const og = document.querySelector('meta[property="og:image"]');
+      const tw = document.querySelector('meta[name="twitter:image"]');
+      const ogText = encodeURIComponent(
+        SERVICE_OG_TEXT_EN.trim().replace(/\s+/g, "+")
+      );
+      const ogUrl = `https://dummyimage.com/1200x630/0f172a/ffffff&text=${ogText}`;
+      if (og) og.setAttribute("content", ogUrl);
+      if (tw) tw.setAttribute("content", ogUrl);
+
+      // 파비콘 data URI 자동 생성(서비스마다 글자만 바꾸면 됨)
+      const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#0f172a"/>
+      <text x="50" y="64" font-size="44" text-anchor="middle" fill="white"
+            font-family="system-ui, -apple-system, Segoe UI, Roboto">
+        ${escapeXml(FAVICON_TEXT)}
+      </text>
+    </svg>`;
+      const faviconHref =
+        "data:image/svg+xml," + encodeURIComponent(faviconSvg);
+      document.getElementById("favicon").setAttribute("href", faviconHref);
+
+      function escapeXml(s) {
+        return String(s).replace(
+          /[<>&'"]/g,
+          (c) =>
+            ({
+              "<": "&lt;",
+              ">": "&gt;",
+              "&": "&amp;",
+              "'": "&apos;",
+              '"': "&quot;",
+            }[c])
+        );
+      }
+
+      /***************
+       * 설문 로직
+       ***************/
+      const state = {
+        goal: null,
+        eating: null,
+        activity: null,
+        hunger: null,
+        heightCm: null,
+        weightKg: null,
+      };
+
+      const steps = [...document.querySelectorAll(".step")];
+      const resultEl = document.getElementById("result");
+      const stepLabel = document.getElementById("stepLabel");
+      const bar = document.getElementById("bar");
+      const restartBtn = document.getElementById("restartBtn");
+
+      let current = 1;
+      const LAST_STEP = 6; // 1~6은 입력, 7은 결과(result)
+
+      function showStep(n) {
+        current = n;
+        steps.forEach((s) =>
+          s.classList.toggle("active", Number(s.dataset.step) === n)
+        );
+        resultEl.classList.remove("show");
+
+        const total = 7; // 결과까지 포함 표시
+        stepLabel.textContent = `STEP ${n} / ${total}`;
+        const progress = Math.round(((n - 1) / (total - 1)) * 100);
+        bar.style.width = progress + "%";
+      }
+
+      function showResult() {
+        stepLabel.textContent = `RESULT / 7`;
+        bar.style.width = "100%";
+        steps.forEach((s) => s.classList.remove("active"));
+        resultEl.classList.add("show");
+        renderResult();
+      }
+
+      // 선택 버튼 처리
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".choice");
+        if (!btn) return;
+
+        const key = btn.dataset.key;
+        const val = btn.dataset.val;
+
+        // 같은 그룹 내 aria-pressed 리셋
+        const group = btn.parentElement;
+        [...group.querySelectorAll(".choice")].forEach((b) =>
+          b.setAttribute("aria-pressed", "false")
+        );
+        btn.setAttribute("aria-pressed", "true");
+        state[key] = val;
+
+        // "딸각 한번" 컨셉: 선택하면 자동 다음
+        const stepEl = btn.closest(".step");
+        const stepNum = Number(stepEl.dataset.step);
+        // 1~4는 자동 다음
+        if (stepNum >= 1 && stepNum <= 4) goNext(stepEl);
+      });
+
+      // prev/next 처리
+      document.addEventListener("click", (e) => {
+        if (e.target.matches("[data-prev]")) {
+          showStep(Math.max(1, current - 1));
+        }
+        if (e.target.matches("[data-next]")) {
+          const stepEl = e.target.closest(".step");
+          goNext(stepEl);
+        }
+      });
+
+      restartBtn.addEventListener("click", () => resetAll());
+      document.getElementById("finishBtn").addEventListener("click", () => {
+        const stepEl = document.querySelector('.step[data-step="6"]');
+        if (!validateStep(stepEl)) return;
+        showResult();
+      });
+
+      document.getElementById("backToSurvey").addEventListener("click", () => {
+        // 결과에서 다시 1단계로
+        showStep(1);
+      });
+
+      document.getElementById("copyBtn").addEventListener("click", async () => {
+        const text = `[BMI Survey Result]
+BMI: ${document.getElementById("bmiBig").textContent}
+${document.getElementById("badge").textContent}
+${document.getElementById("oneLiner").textContent}
+- Priority: ${document.getElementById("priorityTip").textContent}
+- After meal: ${document.getElementById("afterMeal").textContent}
+- Glucose: ${document.getElementById("glucose").textContent}
+- IF: ${document.getElementById("ifTip").textContent}
+- Workout: ${document.getElementById("workout").textContent}
+`;
+        try {
+          await navigator.clipboard.writeText(text);
+          alert("복사 완료! (이제 친구에게 자랑… 아니 공유 가능)");
+        } catch {
+          alert("복사 실패. 브라우저 권한을 확인해 주세요.");
+        }
+      });
+
+      function goNext(stepEl) {
+        if (!validateStep(stepEl)) return;
+        const next = Math.min(LAST_STEP, current + 1);
+        showStep(next);
+      }
+
+      function warn(stepEl, message) {
+        const w = stepEl.querySelector(".warn");
+        if (!w) return;
+        w.style.display = "block";
+        w.textContent = "⚠️ " + message;
+      }
+      function clearWarn(stepEl) {
+        const w = stepEl.querySelector(".warn");
+        if (!w) return;
+        w.style.display = "none";
+        w.textContent = "";
+      }
+
+      function validateStep(stepEl) {
+        clearWarn(stepEl);
+        const n = Number(stepEl.dataset.step);
+
+        if (n === 1 && !state.goal) {
+          warn(stepEl, "목표를 하나 골라주세요.");
+          return false;
+        }
+        if (n === 2 && !state.eating) {
+          warn(stepEl, "식사 스타일을 하나 골라주세요.");
+          return false;
+        }
+        if (n === 3 && !state.activity) {
+          warn(stepEl, "운동 타입을 하나 골라주세요.");
+          return false;
+        }
+        if (n === 4 && !state.hunger) {
+          warn(stepEl, "배고픔 패턴을 하나 골라주세요.");
+          return false;
+        }
+
+        if (n === 5) {
+          const h = Number(document.getElementById("height").value);
+          if (!Number.isFinite(h)) {
+            warn(stepEl, "키를 숫자로 입력해 주세요.");
+            return false;
+          }
+          if (h < 80 || h > 230) {
+            warn(stepEl, "키(cm) 범위가 조금 이상해요. 단위를 확인해 주세요.");
+            return false;
+          }
+          state.heightCm = h;
+        }
+
+        if (n === 6) {
+          const w = Number(document.getElementById("weight").value);
+          if (!Number.isFinite(w)) {
+            warn(stepEl, "몸무게를 숫자로 입력해 주세요.");
+            return false;
+          }
+          if (w < 20 || w > 250) {
+            warn(
+              stepEl,
+              "몸무게(kg) 범위가 조금 이상해요. 단위를 확인해 주세요."
+            );
+            return false;
+          }
+          state.weightKg = w;
+        }
+
+        return true;
+      }
+
+      function resetAll() {
+        state.goal = state.eating = state.activity = state.hunger = null;
+        state.heightCm = state.weightKg = null;
+
+        // aria-pressed 초기화
+        document
+          .querySelectorAll(".choice")
+          .forEach((b) => b.setAttribute("aria-pressed", "false"));
+        document.getElementById("height").value = "";
+        document.getElementById("weight").value = "";
+
+        showStep(1);
+      }
+
+      /***************
+       * 결과 생성 로직(“설문 스타일에 맞춰” 재밌게 + 다이어트 팁)
+       ***************/
+      function bmiClassify(bmi) {
+        if (bmi < 18.5)
+          return { label: "Underweight", ko: "저체중", emoji: "🍃" };
+        if (bmi < 23) return { label: "Normal", ko: "정상", emoji: "🌿" };
+        if (bmi < 25) return { label: "Overweight", ko: "과체중", emoji: "🍞" };
+        if (bmi < 30) return { label: "Obese", ko: "비만", emoji: "🍔" };
+        return { label: "Severely Obese", ko: "고도비만", emoji: "🚨" };
+      }
+
+      function renderResult() {
+        const hM = state.heightCm / 100;
+        const bmi = state.weightKg / (hM * hM);
+        const b = Math.round(bmi * 10) / 10;
+        const c = bmiClassify(bmi);
+
+        document.getElementById(
+          "badge"
+        ).textContent = `${c.emoji} ${c.ko} (${c.label})`;
+        document.getElementById("bmiBig").textContent = `${b.toFixed(1)} BMI`;
+        document.getElementById("funLine").textContent = funLineByProfile(
+          b,
+          c.ko
+        );
+
+        // 맞춤 팁 생성
+        const one = oneLinerByProfile();
+        const pri = priorityByProfile();
+        const after = afterMealTip();
+        const glu = glucoseTip();
+        const ift = ifTip();
+        const wo = workoutTip();
+
+        document.getElementById("oneLiner").textContent = one;
+        document.getElementById("priorityTip").textContent = pri;
+        document.getElementById("afterMeal").textContent = after;
+        document.getElementById("glucose").textContent = glu;
+        document.getElementById("ifTip").textContent = ift;
+        document.getElementById("workout").textContent = wo;
+      }
+
+      function funLineByProfile(bmi, bmiKo) {
+        const mood =
+          state.goal === "quickstart"
+            ? "speed"
+            : state.goal === "fatloss"
+            ? "focus"
+            : state.goal === "recomp"
+            ? "shape"
+            : "steady";
+
+        const lines = {
+          speed: [
+            `오늘부터 “딱 3가지만” 하면 됩니다. (BMI ${bmi.toFixed(
+              1
+            )} / ${bmiKo})`,
+            `계획은 짧게, 실행은 길게. 시작 버튼은 이미 눌렀어요.`,
+          ],
+          focus: [
+            `지방 감량 모드 ON. 이제 남은 건… 간식과의 협상.`,
+            `BMI는 숫자, 결과는 습관. (여기서부터 재밌어집니다)`,
+          ],
+          shape: [
+            `근육은 귀하다. 살은… 협상이 가능하다.`,
+            `체형 개선은 ‘적당히’가 핵심. 과하게 하면 오래 못 가요.`,
+          ],
+          steady: [
+            `꾸준한 사람이 이깁니다. 당신은 이미 반쯤 이긴 셈.`,
+            `무리 없이 가는 게 진짜 빠른 길일 때가 많습니다.`,
+          ],
+        };
+
+        const pool = lines[mood] || lines.steady;
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      function oneLinerByProfile() {
+        // goal + eating + hunger 조합으로 한 줄 캐릭터화
+        const goalWord =
+          {
+            fatloss: "지방 감량",
+            recomp: "체형 개선",
+            health: "건강 습관",
+            quickstart: "빠른 스타트",
+          }[state.goal] || "목표";
+
+        const eater =
+          {
+            snacker: "간식이 잦은 편",
+            bigmeals: "한 끼에 몰아먹는 편",
+            late: "밤에 강한 편",
+            regular: "패턴이 안정적인 편",
+          }[state.eating] || "식사 스타일";
+
+        const hunger =
+          {
+            morning: "아침 배고픔 강함",
+            evening: "저녁 폭발형",
+            random: "랜덤 배고픔",
+            stable: "배고픔 안정적",
+          }[state.hunger] || "배고픔";
+
+        return `${goalWord} + ${eater} + ${hunger} → “현실 기반 플랜”이 제일 잘 맞는 타입.`;
+      }
+
+      function priorityByProfile() {
+        // 가장 “효율 좋은 한 가지”만 추천
+        if (state.eating === "late") {
+          return "야식 방어막: 저녁 식사 후 ‘단백질/채소’로 마무리 + 야식은 ‘계획된’ 것만.";
+        }
+        if (state.eating === "snacker") {
+          return "간식 구조조정: ‘단백질 간식’으로 교체 + 간식 시간 2번만 허용(딱).";
+        }
+        if (state.hunger === "evening") {
+          return "저녁 폭발 방지: 오후에 단백질/섬유질 보강(공복 길게 만들지 않기).";
+        }
+        if (state.activity === "none") {
+          return "최소 운동: 식후 10분 걷기부터 고정(의외로 강력).";
+        }
+        return "기본기: 수면 7시간에 최대한 근접 + 물/단백질 먼저 챙기기.";
+      }
+
+      function afterMealTip() {
+        // 식후 운동: 혈당관리/NEAT 관점의 일반적 추천(개인 질환 고려는 별도)
+        if (state.activity === "none")
+          return "식후 10분 산책(실내면 제자리 걷기도 OK).";
+        if (state.activity === "walk")
+          return "식후 12~15분 빠르게 걷기(대화는 가능, 노래는 살짝 힘든 정도).";
+        if (state.activity === "gym")
+          return "식후 10분 가벼운 걷기 + 근력은 ‘식후 1~2시간 뒤’가 편한 편.";
+        return "식후 10~15분 걷기 + 주 2~3회 가벼운 근력(꾸준함이 승리).";
+      }
+
+      function glucoseTip() {
+        // 혈당/식습관: 순서/구성 팁
+        const base =
+          "식사 순서: 채소/단백질 → 탄수화물(후순위). 음료는 ‘칼로리 없는’ 쪽이 유리.";
+        if (state.eating === "snacker") {
+          return (
+            base + " 간식은 ‘단백질+섬유질’ 조합(요거트/견과/삶은 달걀 등)로."
+          );
+        }
+        if (state.eating === "bigmeals") {
+          return (
+            base +
+            " 한 끼가 크면 ‘탄수’ 양을 반만 줄이고 채소/단백질을 늘려 균형 맞추기."
+          );
+        }
+        if (state.eating === "late") {
+          return (
+            base +
+            " 늦은 시간엔 ‘가벼운 단백질’로 마감하면 다음날 공복 폭발이 줄어듭니다."
+          );
+        }
+        return base;
+      }
+
+      function ifTip() {
+        // 간헐적 단식은 “가능하면/적합하면”로 안내 (강요 X)
+        if (state.hunger === "morning") {
+          return "아침 배고픔이 강하면 무리한 간헐적 단식보다 ‘아침 단백질’이 더 잘 맞는 편.";
+        }
+        if (state.hunger === "evening") {
+          return "저녁 폭발형은 12:12(야식 컷)처럼 ‘가벼운 시간 제한’부터가 현실적.";
+        }
+        if (state.eating === "late") {
+          return "야식이 잦다면 12:12로 시작(예: 9pm~9am 금식) → 적응되면 조금씩 조정.";
+        }
+        return "무난한 옵션: 12:12부터(무리 없이). 배고픔/수면이 무너지면 바로 완화하는 게 정답.";
+      }
+
+      function workoutTip() {
+        // 운동 구성 추천: 활동 타입 기반
+        if (state.activity === "none") {
+          return "주 5일: 식후 10분 걷기 + 주 2일: 스쿼트/푸시업/플랭크 10분(아주 가볍게).";
+        }
+        if (state.activity === "walk") {
+          return "주 4~5일 걷기 30분 + 주 2일 하체/코어 15분(무릎 편한 범위).";
+        }
+        if (state.activity === "gym") {
+          return "주 2~4회 근력(전신 위주) + 매일 NEAT(걷기/계단)로 ‘총 활동량’ 올리기.";
+        }
+        return "주 2~3회 근력 + 주 2~3회 유산소(20~30분) + 식후 10분 걷기(혈당/습관용).";
+      }
+
+      // 시작
+      showStep(1);
+    </script>
+  </body>
+</html>
