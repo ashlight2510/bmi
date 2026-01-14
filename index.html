@@ -473,15 +473,56 @@
       margin: 16px auto;
         text-align: center;
 }
+    .lang-switch {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: inline-flex;
+      gap: 0;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(11, 16, 32, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      border: 1px solid rgba(24, 213, 200, 0.2);
+    }
+    .lang-switch button {
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 44px;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+    .lang-switch button.active {
+      background: rgba(24, 213, 200, 0.3);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(24, 213, 200, 0.4);
+    }
+    .lang-switch button:not(.active):hover {
+      background: rgba(24, 213, 200, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+    }
   </style>
 </head>
 
   <body>
+    <div class="lang-switch" role="tablist" aria-label="Language switcher">
+      <button type="button" data-lang="ko" class="active">KR</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
     <div class="wrap">
       <div class="card">
         <header>
-          <h1 id="serviceTitle">BMI 설문형 다이어트 플랜</h1>
-          <p class="sub">
+          <h1 id="serviceTitle" data-i18n="title">BMI 설문형 다이어트 플랜</h1>
+          <p class="sub" data-i18n="subtitle">
             한 번씩만 딸각. 숫자도 한 번씩만. 그리고 결과는… 은근히 도움 됨.
           </p>
         </header>
@@ -492,7 +533,7 @@
             <div class="progress" aria-label="progress">
               <div class="bar" id="bar"></div>
             </div>
-            <button class="btn ghost" id="restartBtn" type="button">
+            <button class="btn ghost" id="restartBtn" type="button" data-i18n="restartBtn">
               처음부터
             </button>
           </div>
@@ -854,6 +895,96 @@
       /***************
        * 프로젝트별로 “자동 세팅”하기 쉽게 만든 상수들
        ***************/
+      /* i18n */
+      const translations = {
+        ko: {
+          metaTitle: "BMI Survey | Fun Diet Plan",
+          metaDescription: "A fun step-by-step BMI survey that gives personalized diet tips based on your style.",
+          title: "BMI 설문형 다이어트 플랜",
+          subtitle: "한 번씩만 딸각. 숫자도 한 번씩만. 그리고 결과는… 은근히 도움 됨.",
+          restartBtn: "처음부터",
+          stepLabel: "STEP {current} / {total}",
+          resultLabel: "RESULT / 7"
+        },
+        en: {
+          metaTitle: "BMI Survey | Fun Diet Plan",
+          metaDescription: "A fun step-by-step BMI survey that gives personalized diet tips based on your style.",
+          title: "BMI Survey Diet Plan",
+          subtitle: "Click once. Enter numbers once. And the result... surprisingly helpful.",
+          restartBtn: "Start Over",
+          stepLabel: "STEP {current} / {total}",
+          resultLabel: "RESULT / 7"
+        }
+      };
+      const defaultLang = "en";
+      const supportedLangs = ["ko", "en"];
+      let currentLang = defaultLang;
+      function t(key, vars = {}) {
+        const langTable = translations[currentLang] || translations.ko;
+        const template = langTable?.[key] ?? translations.ko?.[key] ?? key;
+        if (typeof template !== "string") return template;
+        return template.replace(/\{(\w+)\}/g, (_, token) =>
+          vars[token] !== undefined ? vars[token] : `{${token}}`
+        );
+      }
+      function applyTranslations() {
+        document.title = t("metaTitle");
+        const desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute("content", t("metaDescription"));
+        document.documentElement.lang = currentLang;
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          el.textContent = t(el.dataset.i18n);
+        });
+      }
+      function setLang(lang, options = {}) {
+        const nextLang = translations[lang] ? lang : defaultLang;
+        currentLang = nextLang;
+        document.documentElement.lang = nextLang;
+        localStorage.setItem("preferredLang", nextLang);
+        document.querySelectorAll(".lang-switch button").forEach((button) => {
+          button.classList.toggle("active", button.dataset.lang === nextLang);
+        });
+        applyTranslations();
+        if (typeof showStep === "function" && current) showStep(current);
+        if (options.updateUrl) {
+          const url = new URL(window.location.href);
+          url.searchParams.set("lang", nextLang);
+          window.history.replaceState({}, "", url);
+        }
+      }
+      function getRegionPreferredLang(fallback = defaultLang) {
+        const intlLocale =
+          typeof Intl === "object" && typeof Intl.DateTimeFormat === "function"
+            ? Intl.DateTimeFormat().resolvedOptions().locale
+            : "";
+        const sources = [
+          ...(navigator.languages || []),
+          navigator.language,
+          navigator.userLanguage,
+          intlLocale,
+        ]
+          .filter(Boolean)
+          .map((locale) => locale.toLowerCase());
+        const hasKorean = sources.some((locale) => locale.startsWith("ko"));
+        return hasKorean ? "ko" : fallback;
+      }
+
+      function detectLang() {
+        const params = new URLSearchParams(window.location.search);
+        const paramLang = params.get("lang");
+        if (supportedLangs.includes(paramLang)) return paramLang;
+        const stored = localStorage.getItem("preferredLang");
+        if (supportedLangs.includes(stored)) return stored;
+        const candidate = getRegionPreferredLang(defaultLang);
+        return supportedLangs.includes(candidate) ? candidate : defaultLang;
+      }
+      document.querySelectorAll(".lang-switch button").forEach((button) => {
+        button.addEventListener("click", () => {
+          setLang(button.dataset.lang, { updateUrl: true });
+        });
+      });
+      setLang(detectLang(), { updateUrl: false });
+
       const SERVICE_NAME_KO = "BMI 설문형 다이어트 플랜";
       const SERVICE_OG_TEXT_EN = "BMI Survey Diet Plan"; // ✅ og:image text에 들어갈 영어
       const FAVICON_TEXT = "BMI"; // ✅ 파비콘에 찍힐 1~3글자(영문 권장)
@@ -927,13 +1058,13 @@
         resultEl.classList.remove("show");
 
         const total = 7; // 결과까지 포함 표시
-        stepLabel.textContent = `STEP ${n} / ${total}`;
+        stepLabel.textContent = t("stepLabel", { current: n, total });
         const progress = Math.round(((n - 1) / (total - 1)) * 100);
         bar.style.width = progress + "%";
       }
 
       function showResult() {
-        stepLabel.textContent = `RESULT / 7`;
+        stepLabel.textContent = t("resultLabel");
         bar.style.width = "100%";
         steps.forEach((s) => s.classList.remove("active"));
         resultEl.classList.add("show");
