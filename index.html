@@ -1289,9 +1289,9 @@
         }
 
         const total = 7; // 결과까지 포함 표시
-        stepLabel.textContent = t("stepLabel", { current: n, total });
+        if (stepLabel) stepLabel.textContent = t("stepLabel", { current: n, total });
         const progress = Math.round(((n - 1) / (total - 1)) * 100);
-        bar.style.width = progress + "%";
+        if (bar) bar.style.width = progress + "%";
       }
 
       function showResult() {
