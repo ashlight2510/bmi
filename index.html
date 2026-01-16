@@ -1206,6 +1206,13 @@
         }
         return defaultLang;
       }
+      // DOM 요소들을 먼저 선언 (setLang 호출 전에)
+      const steps = [...document.querySelectorAll(".step")];
+      const resultEl = document.getElementById("result");
+      const stepLabel = document.getElementById("stepLabel");
+      const bar = document.getElementById("bar");
+      const restartBtn = document.getElementById("restartBtn");
+
       document.querySelectorAll(".lang-switch button").forEach((button) => {
         button.addEventListener("click", () => {
           setLang(button.dataset.lang, { updateUrl: true });
@@ -1271,19 +1278,15 @@
         weightKg: null,
       };
 
-      const steps = [...document.querySelectorAll(".step")];
-      const resultEl = document.getElementById("result");
-      const stepLabel = document.getElementById("stepLabel");
-      const bar = document.getElementById("bar");
-      const restartBtn = document.getElementById("restartBtn");
-
       function showStep(n) {
         current = n;
         const steps = [...document.querySelectorAll(".step")];
         steps.forEach((s) =>
           s.classList.toggle("active", Number(s.dataset.step) === n)
         );
-        resultEl.classList.remove("show");
+        if (resultEl) {
+          resultEl.classList.remove("show");
+        }
 
         const total = 7; // 결과까지 포함 표시
         stepLabel.textContent = t("stepLabel", { current: n, total });
