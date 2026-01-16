@@ -1132,6 +1132,9 @@
       const defaultLang = "ko";
       const supportedLangs = ["ko", "en"];
       let currentLang = defaultLang;
+      
+      // current 변수를 먼저 선언 (setLang에서 참조하기 전에)
+      let current = 1;
       function t(key, vars = {}) {
         const langTable = translations[currentLang] || translations.ko;
         const template = langTable?.[key] ?? translations.ko?.[key] ?? key;
@@ -1248,8 +1251,6 @@
       /***************
        * 설문 로직
        ***************/
-      // current 변수를 먼저 선언 (setLang에서 참조하기 전에)
-      let current = 1;
       const LAST_STEP = 6; // 1~6은 입력, 7은 결과(result)
 
       const state = {
@@ -1307,8 +1308,10 @@
         // "딸각 한번" 컨셉: 선택하면 자동 다음
         const stepEl = btn.closest(".step");
         const stepNum = Number(stepEl.dataset.step);
-        // 1~4는 자동 다음
-        if (stepNum >= 1 && stepNum <= 4) goNext(stepEl);
+        // 1~4단계는 선택 시 즉시 자동 다음
+        if (stepNum >= 1 && stepNum <= 4) {
+          goNext(stepEl);
+        }
       });
 
       // prev/next 처리
