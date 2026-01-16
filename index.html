@@ -1167,7 +1167,7 @@
           button.classList.toggle("active", button.dataset.lang === nextLang);
         });
         applyTranslations();
-        if (typeof showStep === "function" && current) {
+        if (typeof showStep === "function" && typeof current !== "undefined" && current) {
           showStep(current);
         }
         if (typeof renderResult === "function" && typeof current !== "undefined" && current === 7) {
@@ -1248,6 +1248,10 @@
       /***************
        * 설문 로직
        ***************/
+      // current 변수를 먼저 선언 (setLang에서 참조하기 전에)
+      let current = 1;
+      const LAST_STEP = 6; // 1~6은 입력, 7은 결과(result)
+
       const state = {
         goal: null,
         eating: null,
@@ -1262,9 +1266,6 @@
       const stepLabel = document.getElementById("stepLabel");
       const bar = document.getElementById("bar");
       const restartBtn = document.getElementById("restartBtn");
-
-      let current = 1;
-      const LAST_STEP = 6; // 1~6은 입력, 7은 결과(result)
 
       function showStep(n) {
         current = n;
