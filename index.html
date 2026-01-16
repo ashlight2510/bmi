@@ -543,8 +543,8 @@
             <div class="q">
               <div class="num">1</div>
               <div>
-                <h2>당신의 목표는?</h2>
-                <p>성격(?)에 따라 플랜이 달라집니다.</p>
+                <h2 data-i18n="step1Title">당신의 목표는?</h2>
+                <p data-i18n="step1Desc">성격(?)에 따라 플랜이 달라집니다.</p>
               </div>
             </div>
             <div class="choices" role="group" aria-label="goal">
@@ -554,7 +554,7 @@
                 data-key="goal"
                 data-val="fatloss"
               >
-                <strong>지방 감량</strong><span>체지방 위주로 쭉쭉</span>
+                <strong data-i18n="goalFatloss">지방 감량</strong><span data-i18n="goalFatlossDesc">체지방 위주로 쭉쭉</span>
               </button>
               <button
                 class="choice"
@@ -562,7 +562,7 @@
                 data-key="goal"
                 data-val="recomp"
               >
-                <strong>체형 개선</strong><span>근육은 지키고 라인 정리</span>
+                <strong data-i18n="goalRecomp">체형 개선</strong><span data-i18n="goalRecompDesc">근육은 지키고 라인 정리</span>
               </button>
               <button
                 class="choice"
@@ -570,7 +570,7 @@
                 data-key="goal"
                 data-val="health"
               >
-                <strong>건강 습관</strong><span>무리 없이 오래 가는 방식</span>
+                <strong data-i18n="goalHealth">건강 습관</strong><span data-i18n="goalHealthDesc">무리 없이 오래 가는 방식</span>
               </button>
               <button
                 class="choice"
@@ -578,12 +578,12 @@
                 data-key="goal"
                 data-val="quickstart"
               >
-                <strong>빠른 스타트</strong><span>일단 시작이 반이니까</span>
+                <strong data-i18n="goalQuickstart">빠른 스타트</strong><span data-i18n="goalQuickstartDesc">일단 시작이 반이니까</span>
               </button>
             </div>
             <div class="row">
-              <span class="hint">선택하면 자동으로 다음으로 넘어갑니다.</span>
-              <button class="btn" type="button" data-next>다음</button>
+              <span class="hint" data-i18n="step1Hint">선택하면 자동으로 다음으로 넘어갑니다.</span>
+              <button class="btn" type="button" data-next data-i18n="btnNext">다음</button>
             </div>
             <div class="warn"></div>
           </div>
@@ -593,8 +593,8 @@
             <div class="q">
               <div class="num">2</div>
               <div>
-                <h2>식사 스타일은?</h2>
-                <p>당신의 “현실 루틴”을 기준으로 추천합니다.</p>
+                <h2 data-i18n="step2Title">식사 스타일은?</h2>
+                <p data-i18n="step2Desc">당신의 "현실 루틴"을 기준으로 추천합니다.</p>
               </div>
             </div>
             <div class="choices" role="group" aria-label="eating">
@@ -604,7 +604,7 @@
                 data-key="eating"
                 data-val="snacker"
               >
-                <strong>간식 파티형</strong><span>자잘하게 자주 먹는 편</span>
+                <strong data-i18n="eatingSnacker">간식 파티형</strong><span data-i18n="eatingSnackerDesc">자잘하게 자주 먹는 편</span>
               </button>
               <button
                 class="choice"
@@ -612,8 +612,7 @@
                 data-key="eating"
                 data-val="bigmeals"
               >
-                <strong>한 번에 크게형</strong
-                ><span>한 끼에 몰아서 먹는 편</span>
+                <strong data-i18n="eatingBigmeals">한 번에 크게형</strong><span data-i18n="eatingBigmealsDesc">한 끼에 몰아서 먹는 편</span>
               </button>
               <button
                 class="choice"
@@ -621,7 +620,7 @@
                 data-key="eating"
                 data-val="late"
               >
-                <strong>야식/늦은식사형</strong><span>밤에 힘이 나는 편</span>
+                <strong data-i18n="eatingLate">야식/늦은식사형</strong><span data-i18n="eatingLateDesc">밤에 힘이 나는 편</span>
               </button>
               <button
                 class="choice"
@@ -629,12 +628,12 @@
                 data-key="eating"
                 data-val="regular"
               >
-                <strong>규칙러</strong><span>대체로 일정한 편</span>
+                <strong data-i18n="eatingRegular">규칙러</strong><span data-i18n="eatingRegularDesc">대체로 일정한 편</span>
               </button>
             </div>
             <div class="row">
-              <button class="btn ghost" type="button" data-prev>이전</button>
-              <button class="btn" type="button" data-next>다음</button>
+              <button class="btn ghost" type="button" data-prev data-i18n="btnPrev">이전</button>
+              <button class="btn" type="button" data-next data-i18n="btnNext">다음</button>
             </div>
             <div class="warn"></div>
           </div>
@@ -644,8 +643,8 @@
             <div class="q">
               <div class="num">3</div>
               <div>
-                <h2>운동은 어떤 타입?</h2>
-                <p>“식후 운동/근력/유산소” 비율 추천에 반영됩니다.</p>
+                <h2 data-i18n="step3Title">운동은 어떤 타입?</h2>
+                <p data-i18n="step3Desc">"식후 운동/근력/유산소" 비율 추천에 반영됩니다.</p>
               </div>
             </div>
             <div class="choices" role="group" aria-label="activity">
@@ -655,7 +654,7 @@
                 data-key="activity"
                 data-val="none"
               >
-                <strong>거의 안 함</strong><span>지금은… 마음만 운동 중</span>
+                <strong data-i18n="activityNone">거의 안 함</strong><span data-i18n="activityNoneDesc">지금은… 마음만 운동 중</span>
               </button>
               <button
                 class="choice"
@@ -663,7 +662,7 @@
                 data-key="activity"
                 data-val="walk"
               >
-                <strong>걷기/가벼움</strong><span>산책은 잘함 (좋음)</span>
+                <strong data-i18n="activityWalk">걷기/가벼움</strong><span data-i18n="activityWalkDesc">산책은 잘함 (좋음)</span>
               </button>
               <button
                 class="choice"
@@ -671,7 +670,7 @@
                 data-key="activity"
                 data-val="gym"
               >
-                <strong>근력 위주</strong><span>헬스장/홈트로 근육 지키기</span>
+                <strong data-i18n="activityGym">근력 위주</strong><span data-i18n="activityGymDesc">헬스장/홈트로 근육 지키기</span>
               </button>
               <button
                 class="choice"
@@ -679,12 +678,12 @@
                 data-key="activity"
                 data-val="mixed"
               >
-                <strong>혼합형</strong><span>유산소+근력 적당히</span>
+                <strong data-i18n="activityMixed">혼합형</strong><span data-i18n="activityMixedDesc">유산소+근력 적당히</span>
               </button>
             </div>
             <div class="row">
-              <button class="btn ghost" type="button" data-prev>이전</button>
-              <button class="btn" type="button" data-next>다음</button>
+              <button class="btn ghost" type="button" data-prev data-i18n="btnPrev">이전</button>
+              <button class="btn" type="button" data-next data-i18n="btnNext">다음</button>
             </div>
             <div class="warn"></div>
           </div>
@@ -694,8 +693,8 @@
             <div class="q">
               <div class="num">4</div>
               <div>
-                <h2>당신의 “배고픔 패턴”은?</h2>
-                <p>간헐적 단식/혈당관리/식사 타이밍 추천에 반영합니다.</p>
+                <h2 data-i18n="step4Title">당신의 "배고픔 패턴"은?</h2>
+                <p data-i18n="step4Desc">간헐적 단식/혈당관리/식사 타이밍 추천에 반영합니다.</p>
               </div>
             </div>
             <div class="choices" role="group" aria-label="hunger">
@@ -705,7 +704,7 @@
                 data-key="hunger"
                 data-val="morning"
               >
-                <strong>아침부터 배고픔</strong><span>눈 뜨면 위가 출근함</span>
+                <strong data-i18n="hungerMorning">아침부터 배고픔</strong><span data-i18n="hungerMorningDesc">눈 뜨면 위가 출근함</span>
               </button>
               <button
                 class="choice"
@@ -713,8 +712,7 @@
                 data-key="hunger"
                 data-val="evening"
               >
-                <strong>저녁에 폭발</strong
-                ><span>퇴근하면 배고픔도 퇴근 안 함</span>
+                <strong data-i18n="hungerEvening">저녁에 폭발</strong><span data-i18n="hungerEveningDesc">퇴근하면 배고픔도 퇴근 안 함</span>
               </button>
               <button
                 class="choice"
@@ -722,7 +720,7 @@
                 data-key="hunger"
                 data-val="random"
               >
-                <strong>랜덤</strong><span>배고픔이 자유영혼</span>
+                <strong data-i18n="hungerRandom">랜덤</strong><span data-i18n="hungerRandomDesc">배고픔이 자유영혼</span>
               </button>
               <button
                 class="choice"
@@ -730,12 +728,12 @@
                 data-key="hunger"
                 data-val="stable"
               >
-                <strong>대체로 안정적</strong><span>패턴이 있는 편</span>
+                <strong data-i18n="hungerStable">대체로 안정적</strong><span data-i18n="hungerStableDesc">패턴이 있는 편</span>
               </button>
             </div>
             <div class="row">
-              <button class="btn ghost" type="button" data-prev>이전</button>
-              <button class="btn" type="button" data-next>다음</button>
+              <button class="btn ghost" type="button" data-prev data-i18n="btnPrev">이전</button>
+              <button class="btn" type="button" data-next data-i18n="btnNext">다음</button>
             </div>
             <div class="warn"></div>
           </div>
@@ -745,25 +743,26 @@
             <div class="q">
               <div class="num">5</div>
               <div>
-                <h2>키는 몇 cm?</h2>
-                <p>숫자는 딱 한 번만. (두 번 입력하면… 귀찮아요)</p>
+                <h2 data-i18n="step5Title">키는 몇 cm?</h2>
+                <p data-i18n="step5Desc">숫자는 딱 한 번만. (두 번 입력하면… 귀찮아요)</p>
               </div>
             </div>
             <div class="field">
-              <label for="height">키 (cm)</label>
+              <label for="height" data-i18n="heightLabel">키 (cm)</label>
               <input
                 id="height"
                 type="number"
                 inputmode="decimal"
+                data-i18n-placeholder="heightPlaceholder"
                 placeholder="예: 170"
                 min="80"
                 max="230"
               />
-              <div class="hint">단위는 cm. (m로 입력하면 BMI가 삐끗합니다)</div>
+              <div class="hint" data-i18n="heightHint">단위는 cm. (m로 입력하면 BMI가 삐끗합니다)</div>
             </div>
             <div class="row">
-              <button class="btn ghost" type="button" data-prev>이전</button>
-              <button class="btn" type="button" data-next>다음</button>
+              <button class="btn ghost" type="button" data-prev data-i18n="btnPrev">이전</button>
+              <button class="btn" type="button" data-next data-i18n="btnNext">다음</button>
             </div>
             <div class="warn"></div>
           </div>
@@ -773,25 +772,26 @@
             <div class="q">
               <div class="num">6</div>
               <div>
-                <h2>몸무게는 몇 kg?</h2>
-                <p>여기도 한 번만. (정직함은 건강의 첫걸음)</p>
+                <h2 data-i18n="step6Title">몸무게는 몇 kg?</h2>
+                <p data-i18n="step6Desc">여기도 한 번만. (정직함은 건강의 첫걸음)</p>
               </div>
             </div>
             <div class="field">
-              <label for="weight">몸무게 (kg)</label>
+              <label for="weight" data-i18n="weightLabel">몸무게 (kg)</label>
               <input
                 id="weight"
                 type="number"
                 inputmode="decimal"
+                data-i18n-placeholder="weightPlaceholder"
                 placeholder="예: 65"
                 min="20"
                 max="250"
               />
-              <div class="hint">단위는 kg. (근육 30kg이면 이미 상위권)</div>
+              <div class="hint" data-i18n="weightHint">단위는 kg. (근육 30kg이면 이미 상위권)</div>
             </div>
             <div class="row">
               <button class="btn ghost" type="button" data-prev>이전</button>
-              <button class="btn" type="button" id="finishBtn">
+              <button class="btn" type="button" id="finishBtn" data-i18n="btnViewResult">
                 결과 보기
               </button>
             </div>
@@ -800,7 +800,7 @@
 
           <!-- STEP 7 (결과) -->
           <div class="result" id="result">
-            <div class="badge" id="badge">🧾 결과 생성 중…</div>
+            <div class="badge" id="badge" data-i18n="resultGenerating">🧾 결과 생성 중…</div>
             <div class="big" id="bmiBig">—</div>
             <div class="hint" id="funLine">—</div>
             <div class="bmi-scale" aria-label="BMI 분포 위치">
@@ -813,10 +813,10 @@
                 <span class="scale-marker" id="bmiMarker"></span>
               </div>
               <div class="scale-labels">
-                <span>저체중 18.5</span>
-                <span>정상 23</span>
-                <span>과체중 25</span>
-                <span>비만 30+</span>
+                <span data-i18n="bmiScaleUnder">저체중 18.5</span>
+                <span data-i18n="bmiScaleNormal">정상 23</span>
+                <span data-i18n="bmiScaleOver">과체중 25</span>
+                <span data-i18n="bmiScaleObese">비만 30+</span>
               </div>
             </div>
 
@@ -824,27 +824,27 @@
 
             <div class="cards">
               <div class="mini">
-                <h3>당신 맞춤 “핵심 한 줄”</h3>
+                <h3 data-i18n="resultCardOneLiner">당신 맞춤 "핵심 한 줄"</h3>
                 <p id="oneLiner">—</p>
               </div>
               <div class="mini">
-                <h3>이번 주 실천 1순위</h3>
+                <h3 data-i18n="resultCardPriority">이번 주 실천 1순위</h3>
                 <p id="priorityTip">—</p>
               </div>
               <div class="mini">
-                <h3>식후 운동 (딱 이만큼)</h3>
+                <h3 data-i18n="resultCardAfterMeal">식후 운동 (딱 이만큼)</h3>
                 <p id="afterMeal">—</p>
               </div>
               <div class="mini">
-                <h3>혈당/간식 관리 팁</h3>
+                <h3 data-i18n="resultCardGlucose">혈당/간식 관리 팁</h3>
                 <p id="glucose">—</p>
               </div>
               <div class="mini">
-                <h3>간헐적 단식 (가능하면)</h3>
+                <h3 data-i18n="resultCardIF">간헐적 단식 (가능하면)</h3>
                 <p id="ifTip">—</p>
               </div>
               <div class="mini">
-                <h3>운동 구성 제안</h3>
+                <h3 data-i18n="resultCardWorkout">운동 구성 제안</h3>
                 <p id="workout">—</p>
               </div>
             </div>
@@ -856,7 +856,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                더 많은 테스트 해보기
+                <span data-i18n="btnMoreTests">더 많은 테스트 해보기</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -874,15 +874,15 @@
             </div>
 
             <div class="row">
-              <button class="btn ghost" type="button" id="backToSurvey">
+              <button class="btn ghost" type="button" id="backToSurvey" data-i18n="btnRestartSurvey">
                 설문 다시하기
               </button>
-              <button class="btn" type="button" id="copyBtn">
+              <button class="btn" type="button" id="copyBtn" data-i18n="btnCopyResult">
                 결과 문구 복사
               </button>
             </div>
 
-            <p class="hint">
+            <p class="hint" data-i18n="resultDisclaimer">
               참고: 본 결과는 재미 + 일반 정보 목적입니다. 개인 건강
               상태/질환/약 복용 등이 있으면 전문가 상담이 안전합니다.
             </p>
@@ -898,13 +898,91 @@
       /* i18n */
       const translations = {
         ko: {
-          metaTitle: "BMI Survey | Fun Diet Plan",
-          metaDescription: "A fun step-by-step BMI survey that gives personalized diet tips based on your style.",
+          metaTitle: "BMI 설문형 다이어트 플랜 | 재미있는 다이어트 계획",
+          metaDescription: "단계별 BMI 설문으로 개인 맞춤 다이어트 팁을 받아보세요.",
           title: "BMI 설문형 다이어트 플랜",
           subtitle: "한 번씩만 딸각. 숫자도 한 번씩만. 그리고 결과는… 은근히 도움 됨.",
           restartBtn: "처음부터",
           stepLabel: "STEP {current} / {total}",
-          resultLabel: "RESULT / 7"
+          resultLabel: "RESULT / 7",
+          // Step 1
+          step1Title: "당신의 목표는?",
+          step1Desc: "성격(?)에 따라 플랜이 달라집니다.",
+          goalFatloss: "지방 감량",
+          goalFatlossDesc: "체지방 위주로 쭉쭉",
+          goalRecomp: "체형 개선",
+          goalRecompDesc: "근육은 지키고 라인 정리",
+          goalHealth: "건강 습관",
+          goalHealthDesc: "무리 없이 오래 가는 방식",
+          goalQuickstart: "빠른 스타트",
+          goalQuickstartDesc: "일단 시작이 반이니까",
+          step1Hint: "선택하면 자동으로 다음으로 넘어갑니다.",
+          // Step 2
+          step2Title: "식사 스타일은?",
+          step2Desc: "당신의 \"현실 루틴\"을 기준으로 추천합니다.",
+          eatingSnacker: "간식 파티형",
+          eatingSnackerDesc: "자잘하게 자주 먹는 편",
+          eatingBigmeals: "한 번에 크게형",
+          eatingBigmealsDesc: "한 끼에 몰아서 먹는 편",
+          eatingLate: "야식/늦은식사형",
+          eatingLateDesc: "밤에 힘이 나는 편",
+          eatingRegular: "규칙러",
+          eatingRegularDesc: "대체로 일정한 편",
+          // Step 3
+          step3Title: "운동은 어떤 타입?",
+          step3Desc: "\"식후 운동/근력/유산소\" 비율 추천에 반영됩니다.",
+          activityNone: "거의 안 함",
+          activityNoneDesc: "지금은… 마음만 운동 중",
+          activityWalk: "걷기/가벼움",
+          activityWalkDesc: "산책은 잘함 (좋음)",
+          activityGym: "근력 위주",
+          activityGymDesc: "헬스장/홈트로 근육 지키기",
+          activityMixed: "혼합형",
+          activityMixedDesc: "유산소+근력 적당히",
+          // Step 4
+          step4Title: "당신의 \"배고픔 패턴\"은?",
+          step4Desc: "간헐적 단식/혈당관리/식사 타이밍 추천에 반영합니다.",
+          hungerMorning: "아침부터 배고픔",
+          hungerMorningDesc: "눈 뜨면 위가 출근함",
+          hungerEvening: "저녁에 폭발",
+          hungerEveningDesc: "퇴근하면 배고픔도 퇴근 안 함",
+          hungerRandom: "랜덤",
+          hungerRandomDesc: "배고픔이 자유영혼",
+          hungerStable: "대체로 안정적",
+          hungerStableDesc: "패턴이 있는 편",
+          // Step 5
+          step5Title: "키는 몇 cm?",
+          step5Desc: "숫자는 딱 한 번만. (두 번 입력하면… 귀찮아요)",
+          heightLabel: "키 (cm)",
+          heightPlaceholder: "예: 170",
+          heightHint: "단위는 cm. (m로 입력하면 BMI가 삐끗합니다)",
+          // Step 6
+          step6Title: "몸무게는 몇 kg?",
+          step6Desc: "여기도 한 번만. (정직함은 건강의 첫걸음)",
+          weightLabel: "몸무게 (kg)",
+          weightPlaceholder: "예: 65",
+          weightHint: "단위는 kg. (근육 30kg이면 이미 상위권)",
+          // Buttons
+          btnPrev: "이전",
+          btnNext: "다음",
+          btnViewResult: "결과 보기",
+          btnRestartSurvey: "설문 다시하기",
+          btnCopyResult: "결과 문구 복사",
+          btnMoreTests: "더 많은 테스트 해보기",
+          // Result
+          resultGenerating: "🧾 결과 생성 중…",
+          bmiLocation: "BMI 위치: {value} ({status})",
+          bmiScaleUnder: "저체중 18.5",
+          bmiScaleNormal: "정상 23",
+          bmiScaleOver: "과체중 25",
+          bmiScaleObese: "비만 30+",
+          resultCardOneLiner: "당신 맞춤 \"핵심 한 줄\"",
+          resultCardPriority: "이번 주 실천 1순위",
+          resultCardAfterMeal: "식후 운동 (딱 이만큼)",
+          resultCardGlucose: "혈당/간식 관리 팁",
+          resultCardIF: "간헐적 단식 (가능하면)",
+          resultCardWorkout: "운동 구성 제안",
+          resultDisclaimer: "참고: 본 결과는 재미 + 일반 정보 목적입니다. 개인 건강 상태/질환/약 복용 등이 있으면 전문가 상담이 안전합니다."
         },
         en: {
           metaTitle: "BMI Survey | Fun Diet Plan",
@@ -913,7 +991,142 @@
           subtitle: "Click once. Enter numbers once. And the result... surprisingly helpful.",
           restartBtn: "Start Over",
           stepLabel: "STEP {current} / {total}",
-          resultLabel: "RESULT / 7"
+          resultLabel: "RESULT / 7",
+          // Step 1
+          step1Title: "What's your goal?",
+          step1Desc: "Plans vary based on your personality (?)",
+          goalFatloss: "Fat Loss",
+          goalFatlossDesc: "Focus on reducing body fat",
+          goalRecomp: "Body Recomposition",
+          goalRecompDesc: "Maintain muscle, improve lines",
+          goalHealth: "Healthy Habits",
+          goalHealthDesc: "Sustainable long-term approach",
+          goalQuickstart: "Quick Start",
+          goalQuickstartDesc: "Getting started is half the battle",
+          step1Hint: "Selection automatically moves to the next step.",
+          // Step 2
+          step2Title: "What's your eating style?",
+          step2Desc: "Recommendations based on your \"realistic routine\".",
+          eatingSnacker: "Snacker Type",
+          eatingSnackerDesc: "Frequent small snacks",
+          eatingBigmeals: "Big Meals Type",
+          eatingBigmealsDesc: "Large meals at once",
+          eatingLate: "Late Night Eater",
+          eatingLateDesc: "Stronger at night",
+          eatingRegular: "Regular Eater",
+          eatingRegularDesc: "Generally consistent pattern",
+          // Step 3
+          step3Title: "What's your exercise type?",
+          step3Desc: "Reflected in \"post-meal/strength/cardio\" ratio recommendations.",
+          activityNone: "Almost None",
+          activityNoneDesc: "Just thinking about it now...",
+          activityWalk: "Walking/Light",
+          activityWalkDesc: "Good at walking (good)",
+          activityGym: "Strength Focused",
+          activityGymDesc: "Gym/home workout to maintain muscle",
+          activityMixed: "Mixed",
+          activityMixedDesc: "Moderate cardio + strength",
+          // Step 4
+          step4Title: "What's your \"hunger pattern\"?",
+          step4Desc: "Reflected in intermittent fasting/blood sugar management/meal timing recommendations.",
+          hungerMorning: "Hungry from Morning",
+          hungerMorningDesc: "Stomach wakes up with me",
+          hungerEvening: "Evening Explosion",
+          hungerEveningDesc: "Hunger doesn't clock out when I do",
+          hungerRandom: "Random",
+          hungerRandomDesc: "Free-spirited hunger",
+          hungerStable: "Generally Stable",
+          hungerStableDesc: "Has a pattern",
+          // Step 5
+          step5Title: "What's your height in cm?",
+          step5Desc: "Enter numbers only once. (Twice is... annoying)",
+          heightLabel: "Height (cm)",
+          heightPlaceholder: "e.g. 170",
+          heightHint: "Unit is cm. (Entering in m will mess up BMI)",
+          // Step 6
+          step6Title: "What's your weight in kg?",
+          step6Desc: "Only once here too. (Honesty is the first step to health)",
+          weightLabel: "Weight (kg)",
+          weightPlaceholder: "e.g. 65",
+          weightHint: "Unit is kg. (30kg of muscle already puts you in the top tier)",
+          // Buttons
+          btnPrev: "Previous",
+          btnNext: "Next",
+          btnViewResult: "View Result",
+          btnRestartSurvey: "Restart Survey",
+          btnCopyResult: "Copy Result Text",
+          btnMoreTests: "Explore More Tests",
+          // Result
+          resultGenerating: "🧾 Generating result…",
+          bmiLocation: "BMI position: {value} ({status})",
+          bmiScaleUnder: "Underweight 18.5",
+          bmiScaleNormal: "Normal 23",
+          bmiScaleOver: "Overweight 25",
+          bmiScaleObese: "Obese 30+",
+          resultCardOneLiner: "Your Custom \"Key One-Liner\"",
+          resultCardPriority: "This Week's Priority #1",
+          resultCardAfterMeal: "Post-Meal Exercise (Just This Much)",
+          resultCardGlucose: "Blood Sugar/Snack Management Tips",
+          resultCardIF: "Intermittent Fasting (If Possible)",
+          resultCardWorkout: "Exercise Composition Suggestion",
+          resultDisclaimer: "Note: This result is for fun + general information purposes. If you have personal health conditions/diseases/medications, professional consultation is safer.",
+          // BMI status
+          bmiStatusLow: "Low",
+          bmiStatusNormal: "Normal range",
+          bmiStatusHigh: "High",
+          bmiStatusVeryHigh: "Very high",
+          // Goal words
+          goalWordFatloss: "Fat Loss",
+          goalWordRecomp: "Body Recomposition",
+          goalWordHealth: "Healthy Habits",
+          goalWordQuickstart: "Quick Start",
+          // Eating words
+          eatingWordSnacker: "Frequent snacker",
+          eatingWordBigmeals: "Large meals at once",
+          eatingWordLate: "Strong at night",
+          eatingWordRegular: "Stable pattern",
+          // Hunger words
+          hungerWordMorning: "Morning hunger strong",
+          hungerWordEvening: "Evening explosion type",
+          hungerWordRandom: "Random hunger",
+          hungerWordStable: "Hunger stable",
+          // Fun lines
+          funLineSpeed1: "Just do \"exactly 3 things\" from today. (BMI {bmi} / {status})",
+          funLineSpeed2: "Keep plans short, execution long. You already pressed start.",
+          funLineFocus1: "Fat loss mode ON. Now all that's left... negotiating with snacks.",
+          funLineFocus2: "BMI is a number, results are habits. (It gets interesting from here)",
+          funLineShape1: "Muscle is precious. Fat... is negotiable.",
+          funLineShape2: "Body recomposition is about 'moderation'. Too much won't last long.",
+          funLineSteady1: "Consistency wins. You're already halfway there.",
+          funLineSteady2: "Not rushing is often the truly fast path.",
+          // One liner template
+          oneLinerTemplate: "{goal} + {eating} + {hunger} → \"Reality-based plan\" is the best fit type.",
+          // Priority tips
+          priorityLate: "Late-night defense: Finish dinner with 'protein/veggies' + only 'planned' late-night snacks.",
+          prioritySnacker: "Snack restructuring: Replace with 'protein snacks' + allow snack time only 2 times (exactly).",
+          priorityEvening: "Prevent evening explosion: Boost protein/fiber in afternoon (don't make fasting too long).",
+          priorityNone: "Minimum exercise: Fix at 10-min post-meal walk (surprisingly powerful).",
+          priorityDefault: "Basics: Get as close to 7 hours sleep + prioritize water/protein first.",
+          // After meal tips
+          afterMealNone: "10-min post-meal walk (indoor stepping in place OK).",
+          afterMealWalk: "12~15-min brisk post-meal walk (conversation possible, singing slightly hard).",
+          afterMealGym: "10-min light post-meal walk + strength '1~2 hours after meal' is comfortable.",
+          afterMealDefault: "10~15-min post-meal walk + 2~3 light strength sessions per week (consistency wins).",
+          // Glucose tips
+          glucoseBase: "Meal order: Veggies/protein → carbs (last priority). 'Calorie-free' drinks are advantageous.",
+          glucoseSnacker: " Snacks as 'protein+fiber' combo (yogurt/nuts/boiled eggs, etc.).",
+          glucoseBigmeals: " For large meals, halve 'carbs' and increase veggies/protein for balance.",
+          glucoseLate: " Late hours: End with 'light protein' to reduce next-day fasting explosion.",
+          // IF tips
+          ifMorning: "If morning hunger is strong, 'morning protein' fits better than forced intermittent fasting.",
+          ifEvening: "Evening explosion type: Start with 'light time restriction' like 12:12 (cut late-night).",
+          ifLate: "If late-night eating is frequent, start with 12:12 (e.g. 9pm~9am fast) → adjust gradually as adapted.",
+          ifDefault: "Safe option: Start from 12:12 (without rushing). If hunger/sleep breaks down, immediately ease up. That's the answer.",
+          // Workout tips
+          workoutNone: "5 days/week: 10-min post-meal walk + 2 days/week: 10-min squats/push-ups/planks (very lightly).",
+          workoutWalk: "4~5 days/week: 30-min walk + 2 days/week: 15-min lower body/core (knee-comfortable range).",
+          workoutGym: "2~4 strength sessions/week (full-body focus) + daily NEAT (walk/stairs) to raise 'total activity'.",
+          workoutDefault: "2~3 strength sessions/week + 2~3 cardio sessions/week (20~30min) + 10-min post-meal walk (for blood sugar/habit)."
         }
       };
       const defaultLang = "ko";
@@ -933,7 +1146,16 @@
         if (desc) desc.setAttribute("content", t("metaDescription"));
         document.documentElement.lang = currentLang;
         document.querySelectorAll("[data-i18n]").forEach((el) => {
-          el.textContent = t(el.dataset.i18n);
+          if (el.tagName === "INPUT" && el.dataset.i18nPlaceholder) {
+            el.placeholder = t(el.dataset.i18nPlaceholder);
+          } else if (el.tagName === "LABEL" || el.tagName === "H1" || el.tagName === "H2" || el.tagName === "H3" || el.tagName === "P" || el.tagName === "SPAN" || el.tagName === "BUTTON" || el.tagName === "DIV") {
+            el.textContent = t(el.dataset.i18n);
+          } else {
+            el.textContent = t(el.dataset.i18n);
+          }
+        });
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+          el.placeholder = t(el.dataset.i18nPlaceholder);
         });
       }
       function setLang(lang, options = {}) {
@@ -945,7 +1167,12 @@
           button.classList.toggle("active", button.dataset.lang === nextLang);
         });
         applyTranslations();
-        if (typeof showStep === "function" && current) showStep(current);
+        if (typeof showStep === "function" && current) {
+          showStep(current);
+        }
+        if (typeof renderResult === "function" && typeof current !== "undefined" && current === 7) {
+          renderResult();
+        }
         if (options.updateUrl) {
           const url = new URL(window.location.href);
           url.searchParams.set("lang", nextLang);
@@ -1215,20 +1442,21 @@ ${document.getElementById("oneLiner").textContent}
        * 결과 생성 로직(“설문 스타일에 맞춰” 재밌게 + 다이어트 팁)
        ***************/
       function bmiClassify(bmi) {
+        const isKo = currentLang === "ko";
         if (bmi < 18.5)
-          return { label: "Underweight", ko: "저체중", emoji: "🍃" };
-        if (bmi < 23) return { label: "Normal", ko: "정상", emoji: "🌿" };
-        if (bmi < 25) return { label: "Overweight", ko: "과체중", emoji: "🍞" };
-        if (bmi < 30) return { label: "Obese", ko: "비만", emoji: "🍔" };
-        return { label: "Severely Obese", ko: "고도비만", emoji: "🚨" };
+          return { label: "Underweight", ko: "저체중", emoji: "🍃", text: isKo ? "저체중" : "Underweight" };
+        if (bmi < 23) return { label: "Normal", ko: "정상", emoji: "🌿", text: isKo ? "정상" : "Normal" };
+        if (bmi < 25) return { label: "Overweight", ko: "과체중", emoji: "🍞", text: isKo ? "과체중" : "Overweight" };
+        if (bmi < 30) return { label: "Obese", ko: "비만", emoji: "🍔", text: isKo ? "비만" : "Obese" };
+        return { label: "Severely Obese", ko: "고도비만", emoji: "🚨", text: isKo ? "고도비만" : "Severely Obese" };
       }
 
-      function bmiStatusKo(bmi) {
-        if (bmi < 18.5) return "낮은 편";
-        if (bmi < 23) return "정상 범위";
-        if (bmi < 25) return "높은 편";
-        if (bmi < 30) return "높은 편";
-        return "매우 높은 편";
+      function bmiStatus(bmi) {
+        if (bmi < 18.5) return t("bmiStatusLow");
+        if (bmi < 23) return t("bmiStatusNormal");
+        if (bmi < 25) return t("bmiStatusHigh");
+        if (bmi < 30) return t("bmiStatusHigh");
+        return t("bmiStatusVeryHigh");
       }
 
       function bmiToPercent(bmi) {
@@ -1244,17 +1472,18 @@ ${document.getElementById("oneLiner").textContent}
         const b = Math.round(bmi * 10) / 10;
         const c = bmiClassify(bmi);
 
+        const status = bmiStatus(bmi);
         document.getElementById(
           "badge"
-        ).textContent = `${c.emoji} ${c.ko} (${c.label})`;
+        ).textContent = `${c.emoji} ${c.text} (${c.label})`;
         document.getElementById("bmiBig").textContent = `${b.toFixed(1)} BMI`;
         document.getElementById("funLine").textContent = funLineByProfile(
           b,
-          c.ko
+          c.text
         );
         document.getElementById(
           "bmiCaption"
-        ).textContent = `BMI 위치: ${b.toFixed(1)} (${bmiStatusKo(bmi)})`;
+        ).textContent = t("bmiLocation", { value: b.toFixed(1), status: status });
         document.getElementById("bmiMarker").style.left = `${bmiToPercent(
           bmi
         )}%`;
@@ -1275,7 +1504,7 @@ ${document.getElementById("oneLiner").textContent}
         document.getElementById("workout").textContent = wo;
       }
 
-      function funLineByProfile(bmi, bmiKo) {
+      function funLineByProfile(bmi, bmiText) {
         const mood =
           state.goal === "quickstart"
             ? "speed"
@@ -1287,22 +1516,20 @@ ${document.getElementById("oneLiner").textContent}
 
         const lines = {
           speed: [
-            `오늘부터 “딱 3가지만” 하면 됩니다. (BMI ${bmi.toFixed(
-              1
-            )} / ${bmiKo})`,
-            `계획은 짧게, 실행은 길게. 시작 버튼은 이미 눌렀어요.`,
+            t("funLineSpeed1", { bmi: bmi.toFixed(1), status: bmiText }),
+            t("funLineSpeed2"),
           ],
           focus: [
-            `지방 감량 모드 ON. 이제 남은 건… 간식과의 협상.`,
-            `BMI는 숫자, 결과는 습관. (여기서부터 재밌어집니다)`,
+            t("funLineFocus1"),
+            t("funLineFocus2"),
           ],
           shape: [
-            `근육은 귀하다. 살은… 협상이 가능하다.`,
-            `체형 개선은 ‘적당히’가 핵심. 과하게 하면 오래 못 가요.`,
+            t("funLineShape1"),
+            t("funLineShape2"),
           ],
           steady: [
-            `꾸준한 사람이 이깁니다. 당신은 이미 반쯤 이긴 셈.`,
-            `무리 없이 가는 게 진짜 빠른 길일 때가 많습니다.`,
+            t("funLineSteady1"),
+            t("funLineSteady2"),
           ],
         };
 
@@ -1314,109 +1541,100 @@ ${document.getElementById("oneLiner").textContent}
         // goal + eating + hunger 조합으로 한 줄 캐릭터화
         const goalWord =
           {
-            fatloss: "지방 감량",
-            recomp: "체형 개선",
-            health: "건강 습관",
-            quickstart: "빠른 스타트",
-          }[state.goal] || "목표";
+            fatloss: t("goalWordFatloss"),
+            recomp: t("goalWordRecomp"),
+            health: t("goalWordHealth"),
+            quickstart: t("goalWordQuickstart"),
+          }[state.goal] || t("goalWordQuickstart");
 
         const eater =
           {
-            snacker: "간식이 잦은 편",
-            bigmeals: "한 끼에 몰아먹는 편",
-            late: "밤에 강한 편",
-            regular: "패턴이 안정적인 편",
-          }[state.eating] || "식사 스타일";
+            snacker: t("eatingWordSnacker"),
+            bigmeals: t("eatingWordBigmeals"),
+            late: t("eatingWordLate"),
+            regular: t("eatingWordRegular"),
+          }[state.eating] || t("eatingWordRegular");
 
         const hunger =
           {
-            morning: "아침 배고픔 강함",
-            evening: "저녁 폭발형",
-            random: "랜덤 배고픔",
-            stable: "배고픔 안정적",
-          }[state.hunger] || "배고픔";
+            morning: t("hungerWordMorning"),
+            evening: t("hungerWordEvening"),
+            random: t("hungerWordRandom"),
+            stable: t("hungerWordStable"),
+          }[state.hunger] || t("hungerWordStable");
 
-        return `${goalWord} + ${eater} + ${hunger} → “현실 기반 플랜”이 제일 잘 맞는 타입.`;
+        return t("oneLinerTemplate", { goal: goalWord, eating: eater, hunger: hunger });
       }
 
       function priorityByProfile() {
-        // 가장 “효율 좋은 한 가지”만 추천
+        // 가장 "효율 좋은 한 가지"만 추천
         if (state.eating === "late") {
-          return "야식 방어막: 저녁 식사 후 ‘단백질/채소’로 마무리 + 야식은 ‘계획된’ 것만.";
+          return t("priorityLate");
         }
         if (state.eating === "snacker") {
-          return "간식 구조조정: ‘단백질 간식’으로 교체 + 간식 시간 2번만 허용(딱).";
+          return t("prioritySnacker");
         }
         if (state.hunger === "evening") {
-          return "저녁 폭발 방지: 오후에 단백질/섬유질 보강(공복 길게 만들지 않기).";
+          return t("priorityEvening");
         }
         if (state.activity === "none") {
-          return "최소 운동: 식후 10분 걷기부터 고정(의외로 강력).";
+          return t("priorityNone");
         }
-        return "기본기: 수면 7시간에 최대한 근접 + 물/단백질 먼저 챙기기.";
+        return t("priorityDefault");
       }
 
       function afterMealTip() {
         // 식후 운동: 혈당관리/NEAT 관점의 일반적 추천(개인 질환 고려는 별도)
         if (state.activity === "none")
-          return "식후 10분 산책(실내면 제자리 걷기도 OK).";
+          return t("afterMealNone");
         if (state.activity === "walk")
-          return "식후 12~15분 빠르게 걷기(대화는 가능, 노래는 살짝 힘든 정도).";
+          return t("afterMealWalk");
         if (state.activity === "gym")
-          return "식후 10분 가벼운 걷기 + 근력은 ‘식후 1~2시간 뒤’가 편한 편.";
-        return "식후 10~15분 걷기 + 주 2~3회 가벼운 근력(꾸준함이 승리).";
+          return t("afterMealGym");
+        return t("afterMealDefault");
       }
 
       function glucoseTip() {
         // 혈당/식습관: 순서/구성 팁
-        const base =
-          "식사 순서: 채소/단백질 → 탄수화물(후순위). 음료는 ‘칼로리 없는’ 쪽이 유리.";
+        const base = t("glucoseBase");
         if (state.eating === "snacker") {
-          return (
-            base + " 간식은 ‘단백질+섬유질’ 조합(요거트/견과/삶은 달걀 등)로."
-          );
+          return base + t("glucoseSnacker");
         }
         if (state.eating === "bigmeals") {
-          return (
-            base +
-            " 한 끼가 크면 ‘탄수’ 양을 반만 줄이고 채소/단백질을 늘려 균형 맞추기."
-          );
+          return base + t("glucoseBigmeals");
         }
         if (state.eating === "late") {
-          return (
-            base +
-            " 늦은 시간엔 ‘가벼운 단백질’로 마감하면 다음날 공복 폭발이 줄어듭니다."
-          );
+          return base + t("glucoseLate");
         }
         return base;
       }
 
       function ifTip() {
-        // 간헐적 단식은 “가능하면/적합하면”로 안내 (강요 X)
+        // 간헐적 단식은 "가능하면/적합하면"로 안내 (강요 X)
         if (state.hunger === "morning") {
-          return "아침 배고픔이 강하면 무리한 간헐적 단식보다 ‘아침 단백질’이 더 잘 맞는 편.";
+          return t("ifMorning");
         }
         if (state.hunger === "evening") {
-          return "저녁 폭발형은 12:12(야식 컷)처럼 ‘가벼운 시간 제한’부터가 현실적.";
+          return t("ifEvening");
         }
         if (state.eating === "late") {
-          return "야식이 잦다면 12:12로 시작(예: 9pm~9am 금식) → 적응되면 조금씩 조정.";
+          return t("ifLate");
         }
-        return "무난한 옵션: 12:12부터(무리 없이). 배고픔/수면이 무너지면 바로 완화하는 게 정답.";
+        return t("ifDefault");
       }
 
       function workoutTip() {
         // 운동 구성 추천: 활동 타입 기반
         if (state.activity === "none") {
-          return "주 5일: 식후 10분 걷기 + 주 2일: 스쿼트/푸시업/플랭크 10분(아주 가볍게).";
+          return t("workoutNone");
         }
         if (state.activity === "walk") {
-          return "주 4~5일 걷기 30분 + 주 2일 하체/코어 15분(무릎 편한 범위).";
+          return t("workoutWalk");
         }
         if (state.activity === "gym") {
-          return "주 2~4회 근력(전신 위주) + 매일 NEAT(걷기/계단)로 ‘총 활동량’ 올리기.";
+          return t("workoutGym");
         }
-        return "주 2~3회 근력 + 주 2~3회 유산소(20~30분) + 식후 10분 걷기(혈당/습관용).";
+        return t("workoutDefault");
       }
 
       // 시작
