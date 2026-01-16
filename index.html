@@ -1332,6 +1332,52 @@
         showResult();
       });
 
+      // 숫자 입력 필드에서 입력 완료 시 자동 다음
+      const heightInput = document.getElementById("height");
+      const weightInput = document.getElementById("weight");
+      
+      if (heightInput) {
+        heightInput.addEventListener("input", () => {
+          const stepEl = document.querySelector('.step[data-step="5"]');
+          if (stepEl && validateStep(stepEl)) {
+            // 입력 완료 후 약간의 지연 후 자동 진행
+            clearTimeout(heightInput._autoNext);
+            heightInput._autoNext = setTimeout(() => {
+              goNext(stepEl);
+            }, 500);
+          }
+        });
+        heightInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            const stepEl = document.querySelector('.step[data-step="5"]');
+            if (stepEl && validateStep(stepEl)) {
+              goNext(stepEl);
+            }
+          }
+        });
+      }
+      
+      if (weightInput) {
+        weightInput.addEventListener("input", () => {
+          const stepEl = document.querySelector('.step[data-step="6"]');
+          if (stepEl && validateStep(stepEl)) {
+            // 입력 완료 후 약간의 지연 후 자동 진행
+            clearTimeout(weightInput._autoNext);
+            weightInput._autoNext = setTimeout(() => {
+              showResult();
+            }, 500);
+          }
+        });
+        weightInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            const stepEl = document.querySelector('.step[data-step="6"]');
+            if (stepEl && validateStep(stepEl)) {
+              showResult();
+            }
+          }
+        });
+      }
+
       document.getElementById("backToSurvey").addEventListener("click", () => {
         // 결과에서 다시 1단계로
         showStep(1);
