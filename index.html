@@ -1279,6 +1279,7 @@
 
       function showStep(n) {
         current = n;
+        const steps = [...document.querySelectorAll(".step")];
         steps.forEach((s) =>
           s.classList.toggle("active", Number(s.dataset.step) === n)
         );
