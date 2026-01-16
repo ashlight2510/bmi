@@ -1295,10 +1295,10 @@
       }
 
       function showResult() {
-        stepLabel.textContent = t("resultLabel");
-        bar.style.width = "100%";
+        if (stepLabel) stepLabel.textContent = t("resultLabel");
+        if (bar) bar.style.width = "100%";
         steps.forEach((s) => s.classList.remove("active"));
-        resultEl.classList.add("show");
+        if (resultEl) resultEl.classList.add("show");
         renderResult();
       }
 
